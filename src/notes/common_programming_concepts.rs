@@ -98,10 +98,114 @@ let b = [3; 5]; //creates an array where all elements have the value 3
 let first = a[0];
 let second = a[1];
 
-//TODO: Finish Chapter 3
-//  Functions
-//  Comments
-//  Control Flow
+// rust starts and runs in the main() function
+// function names should be lower snake case and can be defined like the following:
+fn main() {
+    println!("Hello, world!");
+    another_function(); // calling a second function
+}
+fn another_function() {
+    println!("Another function.");
+}
 
+// parameters can be passed to functions, however all parameters must have a defined type and be
+// defined in the function declaration
+// multiple parameters can be defined using commas
+fn main() {
+    print_labeled_measurement(5, 'h');
+}
+fn print_labeled_measurement(value: i32, unit_label: char) {
+    println!("The measurement is: {value}{unit_label}");
+}
 
+// statements are instructions that perform some action and do not return a value
+let y = 6;
 
+// Expressions evaluate to a resulting value
+// expressions do not have a semicolon at the end of the line, if it does, it is actually a statement
+let y = {
+    let x = 3;
+    x + 1
+};
+
+// return values allow function to send data back to the code that calls them
+// return values are not named, but must be declared with ->
+// statements cannot be returned, but expressions can
+fn five() -> i32 {
+    5
+}
+
+// if expressions allow you to run snippets of code based on certain conditions
+// the condition logic must always result in a boolean value
+// only the first block with logic that evaluates to true will be run
+// elif can be used for multiple conditions
+// else can be used as an endcap for coverage if none of the other conditions evaluate to true
+let number = 6;
+
+if number % 4 == 0 {
+    println!("number is divisible by 4");
+} else if number % 3 == 0 {
+    println!("number is divisible by 3");
+} else if number % 2 == 0 {
+    println!("number is divisible by 2");
+} else {
+    println!("number is not divisible by 4, 3, or 2");
+}
+
+// since if is an expressions, it can be used to assign values in a let statement
+let condition = true;
+let number = if condition { 5 } else { 6 };
+
+println!("The value of number is: {number}");
+
+// rust has 3 types of loops: loop, while, for
+
+// loop will iterate over a section of code until you tell it to stop with break
+// continue will skip over the rest of the code for that loop and restart at the top of the loop
+// to return a value from a loop, just add the value you want returned after the break expression
+let mut counter = 0;
+let result = loop {
+    counter += 1;
+
+    if counter == 10 {
+        break counter * 2;
+    }
+};
+
+// if you have multiple loops together, you can add a label to a loop as well as its control code
+let mut count = 0;
+'counting_up: loop {
+    println!("count = {count}");
+    let mut remaining = 10;
+        loop {
+        println!("remaining = {remaining}");
+        if remaining == 9 {
+            break;
+        }
+        if count == 2 {
+            break 'counting_up;
+        }
+        remaining -= 1;
+    }
+
+    count += 1;
+}
+println!("End count = {count}");
+
+// a while loop will continue to loop as long as a condition is met
+let mut number = 3;
+
+while number != 0 {
+    println!("{number}!");
+
+    number -= 1;
+}
+
+println!("LIFTOFF!!!");
+
+// for iterative loops where conditional logic isn't needed, for loops should be used
+let a = [10, 20, 30, 40, 50];
+
+for element in a {
+    println!("the value is: {element}");
+}
